@@ -21,7 +21,7 @@ exports.updateHandler = async (event) => {
 
     const response = {
         statusCode: 200,
-        "{\"message\": \"Updated.\"}",
+        body: "{\"message\": \"Updated.\"}",
     };
 
     return response;
