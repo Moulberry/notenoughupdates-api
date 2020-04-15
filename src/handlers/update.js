@@ -65,7 +65,6 @@ exports.updateHandler = async (event) => {
 		if(auction != undefined && auction.highest_bid_amount > 0) {
 			toParse++;
 			nbt.parse(Buffer.from(auction.item_bytes, 'base64'), async function(error, data) {
-				parsed++;
 				if (error) { throw error; }
 
 				try {
@@ -92,12 +91,17 @@ exports.updateHandler = async (event) => {
                                 Key: { "id": ExtraAttributes.id.value },
                             };
                             const { Item } = await docClient.get(params).promise();
-                            processed[ExtraAttributes.id.value] = Item.value
+                            if(Item == undefined || Item.value == undefined) {
+                                processed[ExtraAttributes.id.value] = {}
+                            } else {
+                                processed[ExtraAttributes.id.value] = Item.value
+                            }
 						}
 						processed[ExtraAttributes.id.value][auction.uuid + "-" + auction.auctioneer] =
 								{"bid": auction.highest_bid_amount, count, enchantments, hot_potato_count, modifier}
 					} catch(err) { }
 				} catch(err) {}
+				parsed++;
 			});
 		}
 	}
