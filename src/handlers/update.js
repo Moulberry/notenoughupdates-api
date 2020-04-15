@@ -16,14 +16,31 @@ exports.updateHandler = async (event) => {
 
     var url = 'https://api.hypixel.net/skyblock/auctions?key=4f6867b2-b8af-437e-86b3-71a8259db905&page=1';
 
-    let settings = { method: "Get" };
+    /*let settings = { method: "Get" };
 
     fetch(url, settings)
         .then(res => res.json())
         .then((json) => {
             console.log("json: ", json.auctions[0])
             // do something with JSON
+        });*/
+
+    let dataString = '';
+
+    await new Promise((resolve, reject) => {
+        const req = https.get(url, function(res) {
+          res.on('data', chunk => {
+            dataString += chunk;
+          });
+          res.on('end', () => {
+            console.log("json: ", JSON.stringify(JSON.parse(dataString), null, 2))
+          });
         });
+
+        req.on('error', (e) => {
+          console.log("ERROR!")
+        });
+    });
 
     const params = {
         TableName: tableName,
