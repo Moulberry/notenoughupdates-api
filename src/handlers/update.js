@@ -1,5 +1,5 @@
 const dynamodb = require('aws-sdk/clients/dynamodb');
-const fetch = require('node-fetch');
+const https = require('https');
 
 const docClient = new dynamodb.DocumentClient();
 
