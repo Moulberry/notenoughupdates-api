@@ -1,5 +1,5 @@
 const dynamodb = require('aws-sdk/clients/dynamodb');
-const http = require('http');
+const fetch = require('node-fetch');
 
 const docClient = new dynamodb.DocumentClient();
 
@@ -16,21 +16,14 @@ exports.updateHandler = async (event) => {
 
     var url = 'http://api.hypixel.net/skyblock/auctions?key=4f6867b2-b8af-437e-86b3-71a8259db905&page=1';
 
-    http.get(url, function(res){
-        var body = '';
+    let settings = { method: "Get" };
 
-        res.on('data', function(chunk){
-            body += chunk;
+    fetch(url, settings)
+        .then(res => res.json())
+        .then((json) => {
+            console.log("json: ", json)
+            // do something with JSON
         });
-
-        res.on('end', function(){
-            console.log("Body: ", body);
-            var fbResponse = JSON.parse(body);
-            console.log("Got a response: ", fbResponse);
-        });
-    }).on('error', function(e){
-          console.log("Got an error: ", e);
-    });
 
     const params = {
         TableName: tableName,
