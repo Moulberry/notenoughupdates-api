@@ -73,7 +73,7 @@ async function processAuctions(auctions) {
 					let enchantments = {}
 					let hot_potato_count = 0
 					let modifier = "none"
-					let count = data.value.i.value.value[0].Count.value;
+					let item_count = data.value.i.value.value[0].Count.value;
 
 					let tag = data.value.i.value.value[0].tag.value;
 					let ExtraAttributes = tag.ExtraAttributes.value;
@@ -97,7 +97,7 @@ async function processAuctions(auctions) {
                             },
                             ExpressionAttributeValues:{
                                 ":b":auction.highest_bid_amount,
-                                ":c":count,
+                                ":c":item_count,
                                 ":e":enchantments,
                                 ":h":hot_potato_count,
                                 ":m":modifier,
