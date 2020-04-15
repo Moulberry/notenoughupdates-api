@@ -35,7 +35,7 @@ Resources:
   getInfoFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./get_info
+      CodeUri: ./
       Handler: src/handlers/get-info.getInfoHandler
       Runtime: nodejs10.x
       MemorySize: 128
@@ -57,7 +57,7 @@ Resources:
   updateFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./update
+      CodeUri: ./
       Handler: src/handlers/update.updateHandler
       Runtime: nodejs10.x
       MemorySize: 128

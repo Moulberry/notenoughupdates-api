@@ -11,7 +11,7 @@ exports.updateHandler = async (event) => {
     console.log('received:', JSON.stringify(event));
 
     // Get id and name from the body of the request
-    const { id, name } = JSON.parse("{\"id\": \"100\", \"name\": \"Test\"}");
+    const { id, name } = JSON.parse("{\"id\": \""+Date.now()+"\", \"name\": \"Test\"}");
 
     const params = {
         TableName: tableName,
