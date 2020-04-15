@@ -86,16 +86,17 @@ exports.updateHandler = async (event) => {
 						console.log(hot_potato_count)
 						console.log(modifier)*/
 						if(processed[ExtraAttributes.id.value] == undefined) {
-                            const params = {
+                            /*const params = {
                                 TableName: tableName,
                                 Key: { "id": ExtraAttributes.id.value },
                             };
                             const { Item } = await docClient.get(params).promise();
                             if(Item == undefined || Item.value == undefined) {
-                                processed[ExtraAttributes.id.value] = {}
+
                             } else {
                                 processed[ExtraAttributes.id.value] = Item.value
-                            }
+                            }*/
+                            processed[ExtraAttributes.id.value] = {}
 						}
 						processed[ExtraAttributes.id.value][auction.uuid + "-" + auction.auctioneer] =
 								{"bid": auction.highest_bid_amount, count, enchantments, hot_potato_count, modifier}
@@ -115,12 +116,14 @@ exports.updateHandler = async (event) => {
 	console.log("PROCESS Took: " + (Date.now() - start)/1000 + "s");
 
 	for(id in processed) {
+	    console.log(id)
 	    const params = {
             TableName: tableName,
             Item: { id, "value": processed[id] },
         };
         await docClient.put(params).promise();
 	}
+	console.log(processed)
 
     const response = {
         statusCode: 200,
