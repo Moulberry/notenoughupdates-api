@@ -37,12 +37,14 @@ exports.updateHandler = async (event) => {
 		});
 
 	for(var i=1; i<totalPages; i++) {
-		fetch(url+i, settings)
-		.then(res => res.json())
-		.then((json) => {
-			auctions = auctions.concat(json.auctions);
-			currentPages++;
-		});
+		try {
+            fetch(url+i, settings)
+            .then(res => res.json())
+            .then((json) => {
+                auctions = auctions.concat(json.auctions);
+                currentPages++;
+            });
+        } catch(err) { console.log(err) }
 	}
 
 	//Max 20s (400 sleeps)
