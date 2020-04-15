@@ -88,10 +88,13 @@ async function processAuctions(auctions) {
 						console.log(enchantments)
 						console.log(hot_potato_count)
 						console.log(modifier)*/
+						var data = {}
+						data.id = ExtraAttributes.id.value;
+						data[auction.uuid + "-" + auction.auctioneer] =
+						    {"bid": auction.highest_bid_amount, count, enchantments, hot_potato_count, modifier};
 						const params = {
                             TableName: tableName,
-                            Item: { id, auction.uuid + "-" + auction.auctioneer:
-                                {"bid": auction.highest_bid_amount, count, enchantments, hot_potato_count, modifier} },
+                            Item: data,
                         };
                         await docClient.update(params).promise();
 					} catch(err) { console.log(err)}
