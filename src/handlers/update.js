@@ -72,7 +72,7 @@ async function processAuctions(auctions) {
 				try {
 					let enchantments = {}
 					let hot_potato_count = 0
-					let modifier = ""
+					let modifier = "none"
 					let count = data.value.i.value.value[0].Count.value;
 
 					let tag = data.value.i.value.value[0].tag.value;
