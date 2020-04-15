@@ -28,7 +28,7 @@ exports.updateHandler = async (event) => {
 	let totalPages = 1;
 	let currentPages = 0;
 
-	await fetch(url+'10', settings)
+	await fetch(url+'0', settings)
 		.then(res => res.json())
 		.then((json) => {
 			totalPages = json.totalPages;
@@ -36,8 +36,7 @@ exports.updateHandler = async (event) => {
 			auctions = auctions.concat(json.auctions);
 		});
 
-
-	/*for(var i=1; i<totalPages; i++) {
+	for(var i=1; i<totalPages; i++) {
 		fetch(url+i, settings)
 		.then(res => res.json())
 		.then((json) => {
@@ -51,7 +50,7 @@ exports.updateHandler = async (event) => {
 	while(currentPages < totalPages && sleeps < 400) {
 		sleeps++;
 		await sleep(50);
-	}*/
+	}
 	console.log("GET Took: " + (Date.now() - start)/1000 + "s");
 
 	if(auctions[0] == undefined) console.log("Throtted.")
@@ -94,9 +93,6 @@ exports.updateHandler = async (event) => {
                             if(Item == undefined || Item.value == undefined) {
                                 processed[ExtraAttributes.id.value] = {}
                             } else {
-                                console.log(ExtraAttributes.id.value);
-                                console.log(Item);
-                                console.log(Item.value);
                                 processed[ExtraAttributes.id.value] = Item.value
                             }
 						}
