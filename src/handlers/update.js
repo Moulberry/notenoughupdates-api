@@ -21,7 +21,7 @@ exports.updateHandler = async (event) => {
     fetch(url, settings)
         .then(res => res.json())
         .then((json) => {
-            console.log("json: ", json)
+            console.log("json: ", json.auctions[0])
             // do something with JSON
         });
 
