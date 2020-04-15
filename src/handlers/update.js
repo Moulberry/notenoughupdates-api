@@ -28,7 +28,7 @@ exports.updateHandler = async (event) => {
 	let totalPages = 1;
 	let currentPages = 0;
 
-	await fetch(url+'0', settings)
+	await fetch(url+'10', settings)
 		.then(res => res.json())
 		.then((json) => {
 			totalPages = json.totalPages;
@@ -86,17 +86,19 @@ exports.updateHandler = async (event) => {
 						console.log(hot_potato_count)
 						console.log(modifier)*/
 						if(processed[ExtraAttributes.id.value] == undefined) {
-                            /*const params = {
+                            const params = {
                                 TableName: tableName,
                                 Key: { "id": ExtraAttributes.id.value },
                             };
                             const { Item } = await docClient.get(params).promise();
                             if(Item == undefined || Item.value == undefined) {
-
+                                processed[ExtraAttributes.id.value] = {}
                             } else {
+                                console.log(ExtraAttributes.id.value);
+                                console.log(Item);
+                                console.log(Item.value);
                                 processed[ExtraAttributes.id.value] = Item.value
-                            }*/
-                            processed[ExtraAttributes.id.value] = {}
+                            }
 						}
 						processed[ExtraAttributes.id.value][auction.uuid + "-" + auction.auctioneer] =
 								{"bid": auction.highest_bid_amount, count, enchantments, hot_potato_count, modifier}
@@ -123,7 +125,6 @@ exports.updateHandler = async (event) => {
         };
         await docClient.put(params).promise();
 	}
-	console.log(processed)
 
     const response = {
         statusCode: 200,
