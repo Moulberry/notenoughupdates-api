@@ -24,6 +24,7 @@ exports.updateHandler = async (event) => {
         });
 
         res.on('end', function(){
+            console.log("Body: ", body);
             var fbResponse = JSON.parse(body);
             console.log("Got a response: ", fbResponse);
         });
