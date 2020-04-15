@@ -8,6 +8,12 @@ const docClient = new dynamodb.DocumentClient();
 // Get the DynamoDB table name from environment variables
 const tableName = process.env.NEU_TABLE;
 
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}  
+
 exports.updateHandler = async (event) => {
     const { body, httpMethod, path } = event;
 
