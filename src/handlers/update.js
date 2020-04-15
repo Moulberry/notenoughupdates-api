@@ -82,20 +82,26 @@ async function processAuctions(auctions) {
 					try { modifier = ExtraAttributes.modifier.value; } catch(err) { }
 					try {
 						//console.log(auction.uuid + "-" + auction.auctioneer)
-						console.log(ExtraAttributes.id.value)
+						//console.log(ExtraAttributes.id.value)
 						/*console.log(auction.highest_bid_amount);
 						console.log(count)
 						console.log(enchantments)
 						console.log(hot_potato_count)
 						console.log(modifier)*/
-						var data = {}
-						data.id = ExtraAttributes.id.value;
-						data[auction.uuid + "-" + auction.auctioneer] =
-						    {"bid": auction.highest_bid_amount, count, enchantments, hot_potato_count, modifier};
 						const params = {
                             TableName: tableName,
-                            Item: data,
+                            Key: {"id": ExtraAttributes.id.value},
+                            UpdateExpression: "set :i.bid=:b, :i.count=:c, :i.enchantments=:e, :i.hot_potato_count=:h, :i.modifier=:m",
+                            ExpressionAttributeValues:{
+                                ":i":auction.uuid + "-" + auction.auctioneer,
+                                ":b":auction.highest_bid_amount,
+                                ":c":count,
+                                ":e":enchantments,
+                                ":h":hot_potato_count,
+                                ":m":modifier,
+                            }
                         };
+
                         await docClient.update(params).promise();
 					} catch(err) { console.log(err)}
 				} catch(err) {}
