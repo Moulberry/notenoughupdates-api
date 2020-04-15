@@ -91,7 +91,7 @@ async function processAuctions(auctions) {
 						const params = {
                             TableName: tableName,
                             Key: {"id": ExtraAttributes.id.value},
-                            UpdateExpression: "set #i.bid=:b, #i.item_count=:c, #i.enchantments=:e, #i.hot_potato_count=:h, #i.modifier=:m",
+                            UpdateExpression: "set #i={}, #i.bid=:b, #i.item_count=:c, #i.enchantments=:e, #i.hot_potato_count=:h, #i.modifier=:m",
                             ExpressionAttributeNames:{
                                 "#i":auction.uuid + "-" + auction.auctioneer
                             },
