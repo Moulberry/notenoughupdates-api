@@ -1,4 +1,5 @@
 const dynamodb = require('aws-sdk/clients/dynamodb');
+const http = require('http');
 
 const docClient = new dynamodb.DocumentClient();
 
