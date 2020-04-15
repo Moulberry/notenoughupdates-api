@@ -12,7 +12,7 @@ function sleep(ms) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
-}  
+}
 
 exports.updateHandler = async (event) => {
     const { body, httpMethod, path } = event;
@@ -64,7 +64,7 @@ exports.updateHandler = async (event) => {
 		let auction = auctions[i]
 		if(auction != undefined && auction.highest_bid_amount > 0) {
 			toParse++;
-			nbt.parse(Buffer.from(auction.item_bytes, 'base64'), function(error, data) {
+			nbt.parse(Buffer.from(auction.item_bytes, 'base64'), async function(error, data) {
 				parsed++;
 				if (error) { throw error; }
 
