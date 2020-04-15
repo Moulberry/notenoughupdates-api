@@ -1,6 +1,3 @@
-// Create clients and set shared const values outside of the handler
-
-// Create a DocumentClient that represents the query to add an item
 const dynamodb = require('aws-sdk/clients/dynamodb');
 
 const docClient = new dynamodb.DocumentClient();
@@ -11,9 +8,9 @@ const tableName = process.env.SAMPLE_TABLE;
 /**
  * A simple example includes a HTTP post method to add one item to a DynamoDB table.
  */
-exports.putItemHandler = async (event) => {
+exports.updateHandler = async (event) => {
     const { body, httpMethod, path } = event;
-    if (httpMethod !== 'POST') {
+    if (httpMethod !== 'GET') {
         throw new Error(`postMethod only accepts POST method, you tried: ${httpMethod} method.`);
     }
     // All log statements are written to CloudWatch by default. For more information, see
@@ -21,7 +18,7 @@ exports.putItemHandler = async (event) => {
     console.log('received:', JSON.stringify(event));
 
     // Get id and name from the body of the request
-    const { id, name } = JSON.parse(body);
+    const { id, name } = JSON.parse("{\"id\": \"100\", \"name\": \"Test\"}");
 
     // Creates a new item, or replaces an old item with a new item
     // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
@@ -33,9 +30,8 @@ exports.putItemHandler = async (event) => {
 
     const response = {
         statusCode: 200,
-        body,
+        "{\"message\": \"Updated.\"}",
     };
 
-    console.log(`response from: ${path} statusCode: ${response.statusCode} body: ${response.body}`);
     return response;
 };

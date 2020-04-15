@@ -9,59 +9,11 @@ Parameters:
   AppId:
     Type: String
 Resources:
-  getAllItemsFunction:
+  getInfoFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: getAllItemsFunction
-      Handler: src/handlers/get-all-items.getAllItemsHandler
-      Runtime: nodejs10.x
-      MemorySize: 128
-      Timeout: 60
-      Description: A simple example includes a HTTP get method to get all items from
-        a DynamoDB table.
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName:
-            Ref: SampleTable
-      Environment:
-        Variables:
-          SAMPLE_TABLE:
-            Ref: SampleTable
-      Events:
-        Api:
-          Type: Api
-          Properties:
-            Path: /
-            Method: GET
-  getByIdFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: getByIdFunction
-      Handler: src/handlers/get-by-id.getByIdHandler
-      Runtime: nodejs10.x
-      MemorySize: 128
-      Timeout: 60
-      Description: A simple example includes a HTTP get method to get one item by
-        id from a DynamoDB table.
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName:
-            Ref: SampleTable
-      Environment:
-        Variables:
-          SAMPLE_TABLE:
-            Ref: SampleTable
-      Events:
-        Api:
-          Type: Api
-          Properties:
-            Path: /{id}
-            Method: GET
-  putItemFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: putItemFunction
-      Handler: src/handlers/put-item.putItemHandler
+      CodeUri: getInfoFunction
+      Handler: src/handlers/get-info.getInfoHandler
       Runtime: nodejs10.x
       MemorySize: 128
       Timeout: 60
@@ -79,8 +31,32 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: /
-            Method: POST
+            Path: /get_info
+            Method: GET
+  updateFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: updateFunction
+      Handler: src/handlers/update.updateHandler
+      Runtime: nodejs10.x
+      MemorySize: 128
+      Timeout: 60
+      Description: A simple example includes a HTTP post method to add one item to
+        a DynamoDB table.
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: SampleTable
+      Environment:
+        Variables:
+          SAMPLE_TABLE:
+            Ref: SampleTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /update
+            Method: GET
   SampleTable:
     Type: AWS::Serverless::SimpleTable
     Properties:

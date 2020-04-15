@@ -11,7 +11,7 @@ const tableName = process.env.SAMPLE_TABLE;
 /**
  * A simple example includes a HTTP get method to get all items from a DynamoDB table.
  */
-exports.getAllItemsHandler = async (event) => {
+exports.getInfoHandler = async (event) => {
     const { httpMethod, path } = event;
     if (httpMethod !== 'GET') {
         throw new Error(`getAllItems only accept GET method, you tried: ${httpMethod}`);
