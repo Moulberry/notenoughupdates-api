@@ -43,10 +43,10 @@ Resources:
       Description: A simple example includes a HTTP post method to add one item to a DynamoDB table.
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref SampleTable
+            TableName: !Ref NEUData
       Environment:
         Variables:
-          SAMPLE_TABLE: !Ref SampleTable
+          NEU_TABLE: !Ref NEUData
       Events:
         Api:
           Type: Api
@@ -65,10 +65,10 @@ Resources:
       Description: A simple example includes a HTTP post method to add one item to a DynamoDB table.
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref SampleTable
+            TableName: !Ref NEUData
       Environment:
         Variables:
-          SAMPLE_TABLE: !Ref SampleTable
+          NEU_TABLE: !Ref NEUData
       Events:
         Api:
           Type: Api
@@ -77,7 +77,7 @@ Resources:
             Method: GET
 
   # DynamoDB table to store item: {id: &lt;ID&gt;, name: &lt;NAME&gt;}
-  SampleTable:
+  NEUData:
     Type: AWS::Serverless::SimpleTable
     Properties:
       PrimaryKey:

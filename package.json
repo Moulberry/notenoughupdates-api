@@ -5,7 +5,9 @@
     "private": true,
     "dependencies": {
         "aws-sdk": "^2.437.0",
-        "node-fetch": "^2.6.0"
+        "nbt": "^0.8.1",
+        "node-fetch": "^2.6.0",
+        "zlib": "^1.0.5"
     },
     "devDependencies": {
         "jest": "^24.7.1"
