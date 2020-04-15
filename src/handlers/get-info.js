@@ -16,13 +16,6 @@ exports.getInfoHandler = async (event) => {
     if (httpMethod !== 'GET') {
         throw new Error(`getAllItems only accept GET method, you tried: ${httpMethod}`);
     }
-    // All log statements are written to CloudWatch by default. For more information, see
-    // https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-logging.html
-    console.log('received:', JSON.stringify(event));
-
-    // get all items from the table (only first 1MB data, you can use `LastEvaluatedKey` to get the rest of data)
-    // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#scan-property
-    // https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Scan.html
     const params = { TableName: tableName };
     const { Items } = await docClient.scan(params).promise();
 
@@ -31,6 +24,5 @@ exports.getInfoHandler = async (event) => {
         body: JSON.stringify(Items),
     };
 
-    console.log(`response from: ${path} statusCode: ${response.statusCode} body: ${response.body}`);
     return response;
 };
