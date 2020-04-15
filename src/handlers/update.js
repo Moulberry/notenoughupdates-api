@@ -8,6 +8,8 @@ const tableName = process.env.SAMPLE_TABLE;
 exports.updateHandler = async (event) => {
     const { body, httpMethod, path } = event;
 
+    console.log('received:', JSON.stringify(event));
+
     // Get id and name from the body of the request
     const { id, name } = JSON.parse("{\"id\": \"100\", \"name\": \"Test\"}");
 

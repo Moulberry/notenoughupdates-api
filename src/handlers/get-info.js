@@ -13,6 +13,9 @@ exports.getInfoHandler = async (event) => {
     if (httpMethod !== 'GET') {
         throw new Error(`getAllItems only accept GET method, you tried: ${httpMethod}`);
     }
+
+    console.log('received:', JSON.stringify(event));
+
     const params = { TableName: tableName };
     const { Items } = await docClient.scan(params).promise();
 
