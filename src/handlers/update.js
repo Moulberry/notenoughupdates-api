@@ -114,7 +114,7 @@ async function processAuctions(auctions) {
                         }
                         var iqm = total/observations/2;
 
-                        params = {
+                        const params2 = {
                             TableName: tableName,
                             Key: {"id": "AUCTION_PRICE_IQM"},
                             UpdateExpression: "SET #i=:data",
@@ -125,7 +125,7 @@ async function processAuctions(auctions) {
                                 ":data":iqm
                             }
                         };
-                        await docClient.update(params).promise();
+                        await docClient.update(params2).promise();
 					} catch(err) { console.log(err)}
 				} catch(err) {}
 			});
