@@ -14,7 +14,7 @@ exports.getPricesHandler = async (event) => {
         throw new Error(`getAllItems only accept GET method, you tried: ${httpMethod}`);
     }
 
-    console.log('received:', JSON.stringify(event));
+    console.log('received: ', JSON.stringify(event));
 
     const auctionPricesParams = {
         TableName: tableName,
