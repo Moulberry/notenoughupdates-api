@@ -308,7 +308,8 @@ async function processAuctions(auctions) {
                                 "#i":auction.uuid + "-" + auction.auctioneer
                             },
                             ExpressionAttributeValues:{
-                                ":data":{ "bid": auction.highest_bid_amount, item_count, enchantments, hot_potato_count, modifier}
+                                ":data":{ "bid": auction.highest_bid_amount, item_count, enchantments,
+                                                hot_potato_count, modifier, "auction_end": auction.end}
                             },
                             ReturnValues: "ALL_NEW"
                         };
