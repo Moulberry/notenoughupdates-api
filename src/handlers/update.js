@@ -99,7 +99,7 @@ async function processAuctions(auctions) {
                         var bids = [];
                         for(id in attr) {
                             var data = attr[id];
-                            bids.push(data.bid);
+                            bids.push(data.bid/data.item_count);
                         }
                         var observations = bids.length/4;
                         var sorted = bids.sort(function(a, b){return a-b})
