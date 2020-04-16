@@ -244,6 +244,9 @@ exports.updateHandler = async (event) => {
 	await fetch(auctionsUrl+'0', settings)
 		.then(res => res.json())
 		.then(async (json) => {
+		    if(json.success == false) {
+		        console.log("auctions get failed, reason: " + json.cause);
+		    }
 			totalPages = json.totalPages;
 			await processAuctions(json.auctions)
 		});
