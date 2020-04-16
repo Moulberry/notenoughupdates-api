@@ -198,11 +198,11 @@ exports.updateHandler = async (event) => {
 	let toProcess = 0;
 	let processed = 0;
 
-	const params = {
+	const getBazaarProcessIndexParams = {
         TableName: tableName,
         Key: { "id": "BAZAAR_PROCESS_INDEX" },
     };
-    const { IndexItem } = await docClient.get(params).promise();
+    const { IndexItem } = await docClient.get(getBazaarProcessIndexParams).promise();
     var startindex = IndexItem.value;
 
     for(var i=startindex; i<startindex+20; i++) {
@@ -232,11 +232,11 @@ exports.updateHandler = async (event) => {
 			});
     }
 
-    const params = {
+    const setBazaarProcessIndexParams = {
         TableName: tableName,
         IndexItem: { "id": "BAZAAR_PROCESS_INDEX", "value":  (index+20)%products.length},
     };
-    await docClient.put(params).promise();
+    await docClient.put(setBazaarProcessIndexParams).promise();
 
 	await fetch(auctionsUrl+'0', settings)
 		.then(res => res.json())

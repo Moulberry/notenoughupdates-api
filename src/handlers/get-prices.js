@@ -8,7 +8,7 @@ const docClient = new dynamodb.DocumentClient();
 // Get the DynamoDB table name from environment variables
 const tableName = process.env.NEU_TABLE;
 
-exports.getAuctionPricesHandler = async (event) => {
+exports.getPricesHandler = async (event) => {
     const { httpMethod, path } = event;
     if (httpMethod !== 'GET') {
         throw new Error(`getAllItems only accept GET method, you tried: ${httpMethod}`);
@@ -16,11 +16,17 @@ exports.getAuctionPricesHandler = async (event) => {
 
     console.log('received:', JSON.stringify(event));
 
-    const params = {
+    const auctionPricesParams = {
         TableName: tableName,
         Key: { "id": "AUCTION_PRICE_IQM" },
     };
-    const { Item } = await docClient.get(params).promise();
+    const { AuctionPricesItem } = await docClient.get(auctionPricesParams).promise();
+
+    const bazaarPricesParams = {
+        TableName: tableName,
+        Key: { "id": "BAZAAR_PRICES" },
+    };
+    const { AuctionPricesItem } = await docClient.get(auctionPricesParams).promise();
 
     const response = {
         statusCode: 200,
