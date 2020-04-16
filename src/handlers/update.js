@@ -81,13 +81,6 @@ async function processAuctions(auctions) {
 					try { hot_potato_count = ExtraAttributes.hot_potato_count.value; } catch(err) { }
 					try { modifier = ExtraAttributes.modifier.value; } catch(err) { }
 					try {
-						//console.log(auction.uuid + "-" + auction.auctioneer)
-						//console.log(ExtraAttributes.id.value)
-						/*console.log(auction.highest_bid_amount);
-						console.log(count)
-						console.log(enchantments)
-						console.log(hot_potato_count)
-						console.log(modifier)*/
 						const params = {
                             TableName: tableName,
                             Key: {"id": ExtraAttributes.id.value},
@@ -97,9 +90,41 @@ async function processAuctions(auctions) {
                             },
                             ExpressionAttributeValues:{
                                 ":data":{ "bid": auction.highest_bid_amount, item_count, enchantments, hot_potato_count, modifier}
+                            },
+                            ReturnValues: ALL_NEW
+                        };
+                        const { Item } = await docClient.update(params).promise();
+
+                        var bids = [];
+                        for(id in Item) {
+                            var data = Item[id];
+                            bids.append(data.bid);
+                        }
+                        var observations = bids.length/4;
+                        var sorted = bids.sort(function(a, b){return a-b})
+                        var total = 0;
+                        for(var i = Math.ceil(bids.length/4); i<=Math.floor(bids.length*3/4-1); i++) {
+                            console.log(sorted[i])
+                            total += sorted[i];
+                        }
+                        var mod = observations % 1;
+                        if(mod != 0) {
+                            total += sorted[Math.floor(bids.length/4)] * mod;
+                            total += sorted[Math.ceil(bids.length*3/4-1)] * mod;
+                        }
+                        var iqm = total/observations/2;
+
+                        const params = {
+                            TableName: tableName,
+                            Key: {"id": "AUCTION_PRICE_IQM"},
+                            UpdateExpression: "SET #i=:data",
+                            ExpressionAttributeNames:{
+                                "#i":ExtraAttributes.id.value
+                            },
+                            ExpressionAttributeValues:{
+                                ":data":iqm
                             }
                         };
-
                         await docClient.update(params).promise();
 					} catch(err) { console.log(err)}
 				} catch(err) {}
