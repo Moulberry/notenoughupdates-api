@@ -189,6 +189,7 @@ exports.updateHandler = async (event) => {
     const { body, httpMethod, path } = event;
 
     console.log('received:', JSON.stringify(event));
+    console.log("using api key: " + apiKey);
 
     var start = Date.now()
 	var auctionsUrl = 'https://api.hypixel.net/skyblock/auctions?key='+apiKey+'&page=';
