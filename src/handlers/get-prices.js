@@ -22,12 +22,16 @@ exports.getPricesHandler = async (event) => {
     };
     const { AuctionPricesItem } = await docClient.get(auctionPricesParams).promise();
 
+    console.log(AuctionPricesItem)
+
     const bazaarPricesParams = {
         TableName: tableName,
         Key: { "id": "BAZAAR_PRICES" },
     };
     const { BazaarPricesItem } = await docClient.get(bazaarPricesParams).promise();
 
+    console.log(BazaarPricesItem)
+    
     const response = {
         statusCode: 200,
         body: JSON.stringify({AuctionPricesItem, BazaarPricesItem}),
