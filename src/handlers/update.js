@@ -91,7 +91,7 @@ async function processAuctions(auctions) {
                             ExpressionAttributeValues:{
                                 ":data":{ "bid": auction.highest_bid_amount, item_count, enchantments, hot_potato_count, modifier}
                             },
-                            ReturnValues: ALL_NEW
+                            ReturnValues: "ALL_NEW"
                         };
                         const { Item } = await docClient.update(params).promise();
 
