@@ -95,6 +95,7 @@ async function processAuctions(auctions) {
                         };
                         const { Item } = await docClient.update(params).promise();
 
+                        console.log(Item);
                         var bids = [];
                         for(id in Item) {
                             console.log(id)
