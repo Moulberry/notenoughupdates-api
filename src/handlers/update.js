@@ -203,7 +203,10 @@ exports.updateHandler = async (event) => {
         Key: { "id": "BAZAAR_PROCESS_INDEX" },
     };
     const { IndexItem } = await docClient.get(getBazaarProcessIndexParams).promise();
-    var startindex = IndexItem.value;
+    var startindex = 0;
+    if(IndexItem != undefined) {
+        startindex = IndexItem.value;
+    }
 
     for(var i=startindex; i<startindex+20; i++) {
         toProcess++;
