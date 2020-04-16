@@ -36,11 +36,11 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./
-      Handler: src/handlers/get-auction-prices.getInfoHandler
+      Handler: src/handlers/get-auction-prices.getAuctionPricesHandler
       Runtime: nodejs10.x
       MemorySize: 128
       Timeout: 60
-      Description: Gets the values inside the AUCTION_PRICES_
+      Description: Gets the values inside the AUCTION_PRICES_IQM section.
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref NEUData

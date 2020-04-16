@@ -7,6 +7,7 @@ const docClient = new dynamodb.DocumentClient();
 
 // Get the DynamoDB table name from environment variables
 const tableName = process.env.NEU_TABLE;
+const apiKey = process.env.HYPIXEL_API_KEY;
 
 function sleep(ms) {
   return new Promise((resolve) => {
@@ -20,7 +21,7 @@ exports.updateHandler = async (event) => {
     console.log('received:', JSON.stringify(event));
 
     var start = Date.now()
-	var url = 'https://api.hypixel.net/skyblock/auctions?key=4f6867b2-b8af-437e-86b3-71a8259db905&page=';
+	var url = 'https://api.hypixel.net/skyblock/auctions?key='+apiKey+'&page=';
 
 	let settings = { method: "Get" };
 
