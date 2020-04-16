@@ -94,12 +94,13 @@ async function processAuctions(auctions) {
                             ReturnValues: "ALL_NEW"
                         };
                         const Item = await docClient.update(params).promise();
+                        var attr = Item.Attributes;
 
-                        console.log(Item);
+                        console.log(attr);
                         var bids = [];
-                        for(id in Item) {
+                        for(id in attr) {
                             console.log(id)
-                            var data = Item[id];
+                            var data = attr[id];
                             console.log(data)
                             bids.append(data.bid);
                         }
