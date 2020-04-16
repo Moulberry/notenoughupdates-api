@@ -217,7 +217,7 @@ exports.updateHandler = async (event) => {
 			.then(async (json) => {
 				try {
 					var productId = json.product_info.quick_status.productId;
-					var buyPrice = son.product_info.quick_status.buyPrice;
+					var buyPrice = json.product_info.quick_status.buyPrice;
 					var sellPrice = json.product_info.quick_status.sellPrice;
 					const params = {
                         TableName: tableName,
