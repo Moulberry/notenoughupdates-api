@@ -47,7 +47,6 @@ Resources:
       Environment:
         Variables:
           NEU_TABLE: !Ref NEUData
-          HYPIXEL_API_KEY: "4f6867b2-b8af-437e-86b3-71a8259db905"
       Events:
         Api:
           Type: Api
@@ -70,6 +69,7 @@ Resources:
       Environment:
         Variables:
           NEU_TABLE: !Ref NEUData
+          HYPIXEL_API_KEY: "4f6867b2-b8af-437e-86b3-71a8259db905"
       Events:
         Api:
           Type: Api
