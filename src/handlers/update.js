@@ -318,7 +318,12 @@ async function processAuctions(auctions) {
                         var bids = [];
                         for(id in attr) {
                             var data = attr[id];
-                            bids.push(data.bid/data.item_count);
+                            var price = data.bid/data.item_count;
+                            if(Number.isNaN(price)) {
+                                console.log("NAN ("+id+": " + data.bid + "/" + data.item_count)
+                            } else {
+                                bids.push(price);
+                            }
                         }
                         var observations = bids.length/4;
                         var sorted = bids.sort(function(a, b){return a-b})
@@ -333,7 +338,7 @@ async function processAuctions(auctions) {
                         }
                         var iqm = total/observations/2;
                         if(Number.isNaN(iqm)) {
-                            console.log("NaN encountered when calculating average price. \nid: " + ExtraAttributes.id.value + "\n" + sorted)
+                            console.log("NaN encountered when calculating average price. \nid: " + ExtraAttributes.id.value + "\n" + bids)
                             iqm = -1;
                         }
 
