@@ -113,6 +113,10 @@ async function processAuctions(auctions) {
                             total += sorted[Math.ceil(bids.length*3/4-1)] * mod;
                         }
                         var iqm = total/observations/2;
+                        if(Number.isNaN(iqm)) {
+                            console.log(sorted);
+                            iqm = -1;
+                        }
 
                         const params2 = {
                             TableName: tableName,
