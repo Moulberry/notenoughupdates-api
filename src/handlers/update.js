@@ -203,7 +203,7 @@ exports.updateHandler = async (event) => {
         TableName: tableName,
         Key: { "id": "BAZAAR_PROCESS_INDEX" },
     };
-    const { IndexItem } = await docClient.get(getBazaarProcessIndexParams).promise();
+    const IndexItem = (await docClient.get(getBazaarProcessIndexParams).promise()).Item;
     var startindex = 0;
     if(IndexItem != undefined) {
         startindex = IndexItem.value;
@@ -333,6 +333,7 @@ async function processAuctions(auctions) {
                         }
                         var iqm = total/observations/2;
                         if(Number.isNaN(iqm)) {
+                            console.log("NaN encountered when calculating average price. \nid: " + ExtraAttributes.id.value + "\n" + sorted)
                             iqm = -1;
                         }
 
