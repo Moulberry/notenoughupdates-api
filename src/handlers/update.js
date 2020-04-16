@@ -319,9 +319,7 @@ async function processAuctions(auctions) {
                         for(id in attr) {
                             var data = attr[id];
                             var price = data.bid/data.item_count;
-                            if(Number.isNaN(price)) {
-                                console.log("NAN ("+id+": " + data.bid + "/" + data.item_count)
-                            } else {
+                            if(!Number.isNaN(price)) {
                                 bids.push(price);
                             }
                         }
