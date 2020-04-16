@@ -237,7 +237,7 @@ exports.updateHandler = async (event) => {
 
     const setBazaarProcessIndexParams = {
         TableName: tableName,
-        IndexItem: { "id": "BAZAAR_PROCESS_INDEX", "value":  (startindex+20)%products.length},
+        Item: { "id": "BAZAAR_PROCESS_INDEX", "value":  (startindex+20)%products.length},
     };
     await docClient.put(setBazaarProcessIndexParams).promise();
 
