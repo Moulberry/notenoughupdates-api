@@ -96,19 +96,15 @@ async function processAuctions(auctions) {
                         const Item = await docClient.update(params).promise();
                         var attr = Item.Attributes;
 
-                        console.log(attr);
                         var bids = [];
                         for(id in attr) {
-                            console.log(id)
                             var data = attr[id];
-                            console.log(data)
-                            bids.append(data.bid);
+                            bids.push(data.bid);
                         }
                         var observations = bids.length/4;
                         var sorted = bids.sort(function(a, b){return a-b})
                         var total = 0;
                         for(var i = Math.ceil(bids.length/4); i<=Math.floor(bids.length*3/4-1); i++) {
-                            console.log(sorted[i])
                             total += sorted[i];
                         }
                         var mod = observations % 1;
@@ -118,7 +114,6 @@ async function processAuctions(auctions) {
                         }
                         var iqm = total/observations/2;
                         if(Number.isNaN(iqm)) {
-                            console.log(sorted);
                             iqm = -1;
                         }
 
