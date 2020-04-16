@@ -97,7 +97,9 @@ async function processAuctions(auctions) {
 
                         var bids = [];
                         for(id in Item) {
+                            console.log(id)
                             var data = Item[id];
+                            console.log(data)
                             bids.append(data.bid);
                         }
                         var observations = bids.length/4;
