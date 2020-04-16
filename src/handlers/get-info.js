@@ -16,12 +16,15 @@ exports.getInfoHandler = async (event) => {
 
     console.log('received:', JSON.stringify(event));
 
-    const params = { TableName: tableName };
-    const { Items } = await docClient.scan(params).promise();
+    const params = {
+        TableName: tableName,
+        Key: { "id": "AUCTION_PRICE_IQM" },
+    };
+    const { Item } = await docClient.get(params).promise();
 
     const response = {
         statusCode: 200,
-        body: JSON.stringify(Items),
+        body: JSON.stringify(Item),
     };
 
     return response;
