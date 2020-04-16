@@ -224,14 +224,16 @@ exports.updateHandler = async (event) => {
                         Key: {"id": "BAZAAR_PRICES"},
                         UpdateExpression: "SET #i=:data",
                         ExpressionAttributeNames:{
-                            "#i":ExtraAttributes.id.value
+                            "#i":productId
                         },
                         ExpressionAttributeValues:{
-                            ":data":{ productId, buyPrice, sellPrice }
+                            ":data":{ buyPrice, sellPrice }
                         }
                     };
                     await docClient.update(params).promise();
-				} catch(err) {}
+				} catch(err) {
+				    console.log(err)
+				}
 				processed++;
 			});
     }
@@ -347,7 +349,7 @@ async function processAuctions(auctions) {
                         };
                         await docClient.update(params2).promise();
 					} catch(err) { console.log(err)}
-				} catch(err) {}
+				} catch(err) { console.log(err) }
 			});
 		}
 	}
