@@ -93,7 +93,7 @@ async function processAuctions(auctions) {
                             },
                             ReturnValues: "ALL_NEW"
                         };
-                        const { Item } = await docClient.update(params).promise();
+                        const Item = await docClient.update(params).promise();
 
                         console.log(Item);
                         var bids = [];
