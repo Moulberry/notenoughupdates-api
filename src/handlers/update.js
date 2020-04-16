@@ -211,7 +211,7 @@ exports.updateHandler = async (event) => {
     for(var i=startindex; i<startindex+20; i++) {
         toProcess++;
 		var product_name = products[i%products.length];
-		fetch(url+product_name, settings)
+		fetch(bazaarUrl+product_name, settings)
 			.then(res => res.json())
 			.then(async (json) => {
 				try {
