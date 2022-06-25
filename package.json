@@ -6,7 +6,7 @@
     "dependencies": {
         "aws-sdk": "^2.437.0",
         "nbt": "^0.8.1",
-        "node-fetch": "^2.6.0",
+        "node-fetch": "^2.6.7",
         "zlib": "^1.0.5"
     },
     "devDependencies": {
